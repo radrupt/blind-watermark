@@ -21,11 +21,13 @@ docker run --volume /Users/wangdi/projects/blind-watermark/test:/root/image radr
 ffmpeg -i test/test.mp4 -i test/test1.jpg -filter_complex "[1]setpts=4.40/TB[im];[0][im]overlay=eof_action=pass" -c:a copy test/out.mp4
 
 # 恢复盲水印
-# 从视频中获取4.4图片
+# 从视频中获取图片
 ffmpeg -i test/out.mp4 -y -f image2 -ss 00:00:4.4 -vframes 1 test/daoban.jpg
-
+# 获取盗版视频中加上的盲水印
 docker run --volume /Users/wangdi/projects/blind-watermark/test:/root/image radrupt/blind-watermark:v1.0.0  convert /root/image/daoban.jpg -fft /root/image/盗版视频中的水印.png
 ```
 
 # excute
 `sh excute.sh`
+
+# 
